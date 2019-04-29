@@ -25,6 +25,9 @@ int main()
   if(i == 2)
     printf("I am three pid = %d fork!\n",getpid());
   if(i == 3)
+  {
+    sleep(1);
     printf("I am father pid = %d fork!\n",getpid());
+  }
   return 0;
 }
