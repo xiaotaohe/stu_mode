@@ -16,7 +16,11 @@ int main()
   int len = lseek(fd,0,SEEK_END);
 
   //2.创建内存映射区
-  void *ptr = mmap(NULL,len,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
+  //void *ptr = mmap(NULL,len,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
+  //雅正越界操作
+  void *ptr = mmap(NULL,len,PROT_READ|PROT_WRITE,MAP_SHARED,fd,4096);
+  //验证创建mmap完成后，关闭fd有没有影响
+  close(fd);
   if(ptr == MAP_FAILED)
   {
     perror("mmap error");
@@ -34,6 +38,6 @@ int main()
     perror("munmap error!");
     exit(1);
   }
-  close(fd);
+  //close(fd);
   return 0;
 }
