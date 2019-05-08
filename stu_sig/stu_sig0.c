@@ -23,7 +23,7 @@ int main()
     int s;
     printf("father process %d\n",getpid());
     printf("child died pid = %d\n",pid);
-    wait(NULL);
+    wait(&s);
     if(WIFSIGNALED(s))
     {
       printf("died by signal %d\n",WTERMSIG(s));
