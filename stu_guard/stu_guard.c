@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<unistd.h>
 #include<fcntl.h>
+#include<sys/time.h>
 #include<time.h>
 #include<stdlib.h>
 #include<stdlib.h>
@@ -12,7 +13,17 @@
 #include<signal.h>
 #include<string.h>
 #include<ctime>
+#include<signal.h>
 
+void do_work(int nb)
+{
+      int fd = open("/root/Class_L/stu_mode/stu_guard/time_temp.txt",O_CREAT|O_RDWR|O_APPEND,0664);
+      time_t tm;
+      time(&tm);
+      char* s = ctime(&tm);
+      write(fd,s,strlen(s));
+			sleep(3);
+}
 int main()
 {
     /* 屏蔽一些有关控制终端操作的信号 
@@ -47,20 +58,41 @@ int main()
 		{
 			close(i);
 		}
-		int fd = open("/root/Class_L/stu_mode/stu_guard/time_temp.txt",O_CREAT|O_RDWR,0664);
 		while(1)
 		{
       //获取时间
+      //方法1：
       /*
 			time_t time;
 			struct tm *tminfo = localtime(&time);
 			write(fd,asctime(tminfo),strlen(asctime(tminfo)));
       */
+      //方法2：
+      /*
       time_t tm;
       time(&tm);
       char* s = ctime(&tm);
       write(fd,s,strlen(s));
 			sleep(3);
+      */
+      //方法3：使用定时器
+      //1.信号捕捉，捕捉定时器
+      struct sigaction act;
+      act.sa_flags = 0;
+      act.sa_handler = do_work;
+      sigemptyset(&act.sa_mask);
+      sigaction(SIGALRM,&act,NULL);
+      //设置定时器
+      //1.设置第一次触发的时间
+      struct itimerval val;
+      val.it_value.tv_sec = 1;
+      val.it_value.tv_usec = 0;
+      //2.设置循环时间
+      val.it_interval.tv_sec = 2;
+      val.it_interval.tv_usec = 0;
+      setitimer(ITIMER_REAL,&val,NULL);
+      while(1)
+        ;
 		}
   }
 	return 0;
