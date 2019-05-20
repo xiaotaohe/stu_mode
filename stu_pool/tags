@@ -1,0 +1,27 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Thread_pool	stu_thread_pool.c	/^}Thread_pool;$/;"	t	typeref:struct:pool	file:
+Thread_worker	stu_thread_pool.c	/^}Thread_worker;$/;"	t	typeref:struct:worker	file:
+arg	stu_thread_pool.c	/^  void *arg;$/;"	m	struct:worker	file:
+cur_queue_size	stu_thread_pool.c	/^  int cur_queue_size;\/*当前队列中的任务个数*\/ $/;"	m	struct:pool	file:
+main	stu_thread_pool.c	/^int main()$/;"	f
+max_thread_num	stu_thread_pool.c	/^  int max_thread_num;\/*线程池中最大线程数*\/$/;"	m	struct:pool	file:
+my_process	stu_thread_pool.c	/^void* my_process(void *arg)$/;"	f
+next	stu_thread_pool.c	/^  struct worker *next;$/;"	m	struct:worker	typeref:struct:worker::worker	file:
+pool	stu_thread_pool.c	/^static Thread_pool *pool = NULL;\/*线程池*\/$/;"	v	file:
+pool	stu_thread_pool.c	/^typedef struct pool$/;"	s	file:
+pool_add_worker	stu_thread_pool.c	/^bool pool_add_worker(void*(*process)(void* arg),void* arg)$/;"	f
+pool_create	stu_thread_pool.c	/^bool pool_create(int max_thread_num)$/;"	f
+pool_destroy	stu_thread_pool.c	/^void pool_destroy()$/;"	f
+process	stu_thread_pool.c	/^  void* (*process)(void*arg);$/;"	m	struct:worker	file:
+queue_head	stu_thread_pool.c	/^  Thread_worker *queue_head;\/*任务队列*\/$/;"	m	struct:pool	file:
+queue_lock	stu_thread_pool.c	/^  pthread_mutex_t queue_lock;\/*保护任务队列资源的锁*\/$/;"	m	struct:pool	file:
+queue_ready	stu_thread_pool.c	/^  pthread_cond_t queue_ready;\/*线程阻塞的条件变量*\/$/;"	m	struct:pool	file:
+shutdown	stu_thread_pool.c	/^  bool shutdown;\/*线程池的销毁开关*\/$/;"	m	struct:pool	file:
+thread_routine	stu_thread_pool.c	/^void* thread_routine(void* arg)$/;"	f
+threadid	stu_thread_pool.c	/^  pthread_t *threadid;\/*线程池中线程的线程id*\/$/;"	m	struct:pool	file:
+worker	stu_thread_pool.c	/^typedef struct worker$/;"	s	file:
